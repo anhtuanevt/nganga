@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Snowfall Effect</title>
+    <style>
+      
+      .snowflake {
+        position: absolute;
+        z-index: 9999;
+        pointer-events: none;
+        user-select: none;
+        /* background-color: white; */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <img src="tuannga.png" alt="Background Image" id="background-image"> -->
+    <script>
+      // Create an array of snowflakes
+      let snowflakes = [];
+      
+      // Define the number of snowflakes
+      const numberOfSnowflakes = 30;
+      
+      // Create the snowflakes and add them to the array
+      for (let i = 0; i < numberOfSnowflakes; i++) {
+        let snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.innerHTML = "❅";
+        snowflakes.push(snowflake);
+        document.body.appendChild(snowflake);
+      }
+      
+      // Move the snowflakes
+      function moveSnowflakes() {
+        for (let i = 0; i < snowflakes.length; i++) {
+          let snowflake = snowflakes[i];
+          snowflake.style.top = snowflake.offsetTop + snowflake.speed + "px";
+          snowflake.style.left = snowflake.offsetLeft + snowflake.drift + "px";
+          
+          // If the snowflake is off the screen, reset it
+          if (snowflake.offsetTop > window.innerHeight) {
+            snowflake.style.top = -50 + "px";
+            snowflake.style.left = Math.random() * window.innerWidth + "px";
+          }
+        }
+      }
+      
+      // Set the speed and drift of each snowflake
+      for (let i = 0; i < snowflakes.length; i++) {
+        let snowflake = snowflakes[i];
+        snowflake.speed = Math.random() * 2 + 1;
+        snowflake.drift = (Math.random() - 0.5) * 10;
+      }
+      
+      // Call moveSnowflakes every 50 milliseconds
+      setInterval(moveSnowflakes, 50);
+    </script>
+  </body>
+</html>
